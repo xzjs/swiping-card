@@ -1,0 +1,19 @@
+db:
+  user: root
+  pass: 111
+  host: 127.0.0.1
+  port: 3306
+  dbname: ytmy
+aes:
+  key: xzjsxzjsxzjsxzjs
+cookie:
+  name: ytmy
+  domain: yongtaimaoyi.com
+wechat:
+  appid: 111
+  secret: 111
+qiniu:
+  ak: 111
+  sk: 111
+  bucket: ytmy
+  domain: 111
