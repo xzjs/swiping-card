@@ -28,7 +28,7 @@ func PlanPost(c *gin.Context) {
 func PlanGet(c *gin.Context) {
 	var plans []model.Plan
 	db := lib.DB()
-	result := db.Preload("Ways").Find(&plans)
+	result := db.Preload("Ways").Preload("Card").Find(&plans)
 	if result.Error != nil {
 		c.JSON(http.StatusInternalServerError, result.Error.Error())
 	} else {
@@ -61,7 +61,6 @@ func PlanPut(c *gin.Context) {
 	planDB.CardID = plan.CardID
 	planDB.Sum = plan.Sum
 	planDB.CycleID = plan.CycleID
-	planDB.Total = plan.Total
 	db.Save(&planDB)
 	c.JSON(http.StatusOK, "OK")
 }

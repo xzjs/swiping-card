@@ -11,6 +11,7 @@ require (
 	github.com/mattn/go-isatty v0.0.14 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/qiniu/go-sdk/v7 v7.11.0
+	github.com/robfig/cron/v3 v3.0.1 // indirect
 	github.com/ugorji/go v1.2.6 // indirect
 	golang.org/x/crypto v0.0.0-20211108221036-ceb1ce70b4fa // indirect
 	golang.org/x/sync v0.0.0-20210220032951-036812b2e83c // indirect
