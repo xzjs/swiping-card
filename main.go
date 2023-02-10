@@ -60,6 +60,7 @@ func dbinstance() {
 func main() {
 	c := cron.New(cron.WithLogger(
 		cron.VerbosePrintfLogger(log.New(os.Stdout, "cron: ", log.LstdFlags))))
+	// c.AddFunc("* * * * *", func() {
 	c.AddFunc("@daily", func() {
 		if err := controller.DoPost(); err != nil {
 			log.Panicln(err.Error())

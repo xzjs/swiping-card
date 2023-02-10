@@ -25,6 +25,7 @@ func DoPost() error {
 		return result.Error
 	}
 
+PlanLoop:
 	for _, plan := range plans {
 		var dos []model.Do
 		rand.Seed(time.Now().UnixNano())
@@ -45,7 +46,7 @@ func DoPost() error {
 		}
 		for _, do := range dos {
 			if !do.Finished {
-				continue //有任务未完成则不再分配此计划的任务
+				continue PlanLoop //有任务未完成则不再分配此计划的任务
 			}
 			totalNum += 1
 			totalMoney += do.Money
@@ -117,7 +118,10 @@ func DoPut(c *gin.Context) {
 	userID := c.GetUint("userID")
 	db := lib.DB()
 	var doDB model.Do
-	db.Where("user_id = ?", userID).First(&doDB, id)
+	if result := db.Where("user_id = ?", userID).First(&doDB, id); result.Error != nil {
+		c.JSON(http.StatusBadRequest, result.Error.Error())
+		return
+	}
 	doDB.Money = do.Money
 	doDB.WayID = do.WayID
 	doDB.Finished = do.Finished

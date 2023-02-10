@@ -38,21 +38,38 @@ func (cycle *Cycle) GetDays() int {
 	case "天":
 		return 1
 	case "周":
-		return 7
+		return 8 - int(now.Weekday())
 	case "月":
-		return days[month]
+		return days[month] - now.Day() + 1
 	case "季":
-		if month >= 1 && month <= 3 {
-			return days[1] + days[2] + days[3]
-		} else if month >= 4 && month <= 5 {
-			return days[4] + days[5] + days[6]
-		} else if month >= 7 && month <= 9 {
-			return days[7] + days[8] + days[9]
-		} else {
-			return days[10] + days[11] + days[12]
+		switch month {
+		case 1:
+			return days[1] + days[2] + days[3] - now.Day() + 1
+		case 2:
+			return days[2] + days[3] - now.Day() + 1
+		case 3:
+			return days[3] - now.Day() + 1
+		case 4:
+			return days[4] + days[5] + days[6] - now.Day() + 1
+		case 5:
+			return days[5] + days[6] - now.Day() + 1
+		case 6:
+			return days[6] - now.Day() + 1
+		case 7:
+			return days[7] + days[8] + days[9] - now.Day() + 1
+		case 8:
+			return days[8] + days[9] - now.Day() + 1
+		case 9:
+			return days[9] - now.Day() + 1
+		case 10:
+			return days[10] + days[11] + days[12] - now.Day() + 1
+		case 11:
+			return days[11] + days[12] - now.Day() + 1
+		case 12:
+			return days[12] - now.Day() + 1
 		}
 	case "年":
-		return total
+		return total - now.YearDay() + 1
 	}
-	return 0
+	return 1
 }
